@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
+import { Link } from 'react-router-dom';
 import AuthModal from '../components/AuthModal';
 
 export default function Landing() {
@@ -96,18 +97,53 @@ export default function Landing() {
             </div>
 
             <nav className="fixed w-full z-50 glass-nav h-20 flex items-center">
-                <div className="container mx-auto px-6 flex justify-between items-center">
-                    <div className="flex items-center gap-2.5">
-                        <img src="https://i.ibb.co/wr79wGNk/Whats-App-Image-2025-12-13-at-9-36-40-PM-1.jpg" alt="TwinAI Logo" className="w-9 h-9 rounded-xl shadow-lg object-cover" />
-                        <span className="font-bold text-xl tracking-tight text-black">TwinAI</span>
+                <div className="container mx-auto px-4 md:px-6 flex justify-between items-center">
+                    {/* Logo Section: Adjusted spacing for small screens */}
+                    <div className="flex items-center gap-2 md:gap-2.5">
+                        <img
+                            src="https://i.ibb.co/wr79wGNk/Whats-App-Image-2025-12-13-at-9-36-40-PM-1.jpg"
+                            alt="TwinAI Logo"
+                            className="w-8 h-8 md:w-9 md:h-9 rounded-xl shadow-lg object-cover"
+                        />
+                        <span className="font-bold text-lg md:text-xl tracking-tight text-black">TwinAI</span>
                     </div>
-                    <div className="flex items-center gap-6">
+
+                    {/* Actions Section: Responsive gaps and text sizes */}
+                    <div className="flex items-center gap-3 md:gap-6">
+                        {/* Hide pricing on very small screens if necessary, or keep with smaller padding */}
+
+
                         {!isAuthenticated ? (
-                            <button onClick={() => openAuth('login')} className="px-6 py-2.5 rounded-full btn-primary text-sm font-medium">Log In</button>
+                            <>
+                                <Link
+                                    to={'/price'}
+                                    className="px-4 py-2 md:px-6 md:py-2.5 rounded-full bg-white border border-zinc-200 text-xs md:text-sm font-bold text-black hover:bg-zinc-50 transition shadow-sm whitespace-nowrap"
+                                >
+                                    Pricing
+                                </Link>
+                                <button
+                                    onClick={() => openAuth('login')}
+                                    className="px-4 py-2 md:px-6 md:py-2.5 rounded-full btn-primary text-xs md:text-sm font-medium whitespace-nowrap"
+                                >
+                                    Log In
+                                </button>
+                            </>
                         ) : (
-                            <a href="/app" className="px-6 py-2.5 rounded-full bg-white border border-zinc-200 text-sm font-bold text-black hover:bg-zinc-50 transition shadow-sm">
-                                Dashboard <i className="fas fa-arrow-right ml-1"></i>
-                            </a>
+                            <>
+                                <Link
+                                    to={'/price'}
+                                    className="px-4 py-2 md:px-6 md:py-2.5 rounded-full btn-primary text-xs md:text-sm font-medium whitespace-nowrap"
+                                >
+                                    Pricing
+                                </Link>
+                                <a
+                                    href="/app"
+                                    className="px-4 py-2 md:px-6 md:py-2.5 rounded-full bg-white border border-zinc-200 text-xs md:text-sm font-bold text-black hover:bg-zinc-50 transition shadow-sm whitespace-nowrap"
+                                >
+                                    <span>Dashboard</span>
+                                    <i className="fas width:20 fa-arrow-right ml-2"></i>
+                                </a>
+                            </>
                         )}
                     </div>
                 </div>

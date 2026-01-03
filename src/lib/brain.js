@@ -1,7 +1,7 @@
 // --- CONFIGURATION ---
 // ⚠️ WARNING: Your API Key is visible in the browser source code.
 // Ideally, restrict this key's usage to your domain in OpenRouter settings.
-const OPENROUTER_API_KEY = "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"; 
+const OPENROUTER_API_KEY = "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"; 
 const API_URL = 'https://openrouter.ai/api/v1/chat/completions';
 
 // --- PROMPTS ---
