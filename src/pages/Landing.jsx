@@ -124,13 +124,13 @@ export default function Landing() {
                             </>
                         ) : (
                             <>
-                                <a
-                                    href="/app"
+                                <button
+                                    onClick={() => navigate('/app')}
                                     className="px-4 py-2 md:px-6 md:py-2.5 rounded-full bg-white border border-zinc-200 text-xs md:text-sm font-bold text-black hover:bg-zinc-50 transition shadow-sm whitespace-nowrap"
                                 >
                                     <span>Dashboard</span>
                                     <i className="fas width:20 fa-arrow-right ml-2"></i>
-                                </a>
+                                </button>
                             </>
                         )}
                     </div>
