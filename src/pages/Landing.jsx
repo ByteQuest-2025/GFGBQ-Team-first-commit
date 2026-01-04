@@ -161,7 +161,7 @@ export default function Landing() {
                                 </button>
                             ) : (
                                 <button onClick={() => openAuth('signup')} className="px-8 py-4 rounded-2xl btn-primary font-semibold text-lg flex items-center justify-center gap-3">
-                                    Start Chatting Free <i className="fas fa-arrow-right"></i>
+                                    Start Chatting <i className="fas fa-arrow-right"></i>
                                 </button>
                             )}
                             <a href="#how-it-works" className="px-8 py-4 rounded-2xl bg-white border border-zinc-200 text-zinc-700 font-semibold hover:bg-zinc-50 transition flex items-center justify-center gap-2 shadow-sm hover:shadow-md">
