@@ -35,7 +35,7 @@ TwinAI is a powerful AI-driven application that utilizes multiple agents to prov
    ```
 ### Project Structure
 
-    ```
+```txt
 src/
 ├── Assets/
 │   └── (Static assets like images, icons, etc.)
@@ -45,7 +45,7 @@ src/
 │   ├── ChatMessage.jsx     # Single chat message UI
 │   ├── ChatSidebar.jsx     # Sidebar for chats / navigation
 │   ├── SettingsModal.jsx   # User/app settings modal
-│   └── UpgradeModal.jsx    # Plan/upgrade modal
+│   └── UpgradeModal.jsx    # Plan / upgrade modal
 │
 ├── lib/
 │   ├── brain.js            # Core chat / AI logic
@@ -53,10 +53,8 @@ src/
 │   └── supabase.js        # Supabase client & helpers
 │
 ├── pages/
-│   └── (Route-level pages, if applicable)
+│   └── (Route-level pages)
 │
 ├── App.jsx                 # Root React component
 ├── main.jsx                # Application entry point
 └── index.css               # Global styles
-
-    ```
