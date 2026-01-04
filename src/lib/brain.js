@@ -1,12 +1,12 @@
 // --- CONFIGURATION ---
-const OPENROUTER_API_KEY = "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"; 
+const OPENROUTER_API_KEY = "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"; 
 const API_URL = 'https://openrouter.ai/api/v1/chat/completions';
 
 // --- PROMPTS ---
 const PROMPTS = {
-  'agent-a': "You are Deepseek. Answer the user's question. For every major fact, you MUST include a real source URL in brackets [e.g. source: https://example.com]. If you don't know the specific URL, suggest the official website for that topic.",
+  'agent-a': "You are Gemini. Answer the user's question. For every major fact, you MUST include a real source URL in brackets [e.g. source: https://example.com]. If you don't know the specific URL, suggest the official website for that topic.",
 
-  'agent-b': "You are Gemini. Read Deepseek's response and add NEW details or context. You must also provide at least one source URL for your new information. Do not repeat what Deepseek said.",
+  'agent-b': "You are Grok. Read Deepseek's response and add NEW details or context. You must also provide at least one source URL for your new information. Do not repeat what Deepseek said.",
 
   'consensus': `You are the NVIDIA AI Verifier. 
   Your goal is to format the previous insights into a "Verified Report".
