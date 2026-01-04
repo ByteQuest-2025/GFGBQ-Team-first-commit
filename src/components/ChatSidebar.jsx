@@ -31,18 +31,6 @@ export default function ChatSidebar({
                     >
                         <i className="fas fa-plus text-xs"></i> New Debate
                     </button>
-                    {isProUser ? (
-                        <div className="mt-2 w-full py-2.5 px-4 bg-green-50 border border-green-200 text-green-700 rounded-xl flex items-center justify-center gap-2 transition text-xs font-bold uppercase tracking-wide cursor-default">
-                            <i className="fas fa-check-circle text-green-500"></i> Current Plan (Pro)
-                        </div>
-                    ) : (
-                        <Link
-                            to="/pricing"
-                            className="mt-2 w-full py-2.5 px-4 border border-zinc-200 hover:bg-zinc-50 text-zinc-600 rounded-xl flex items-center justify-center gap-2 transition text-xs font-bold uppercase tracking-wide"
-                        >
-                            <i className="fas fa-crown text-yellow-500"></i> Upgrade Plan
-                        </Link>
-                    )}
                 </div>
 
                 <div className="flex-grow overflow-y-auto px-3 space-y-1">

@@ -1,13 +1,12 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 // marked is not used directly in ChatApp, only in ChatMessage
-import { requireAuth, supabase, dbFetchChats, dbCreateChat, dbFetchMessages, dbSaveMessage, dbDeleteChat, checkDailyLimit } from '../lib/supabase';
+import { requireAuth, supabase, dbFetchChats, dbCreateChat, dbFetchMessages, dbSaveMessage, dbDeleteChat} from '../lib/supabase';
 import { callTwinFunction } from '../lib/brain';
 import { extractTextFromFile } from '../lib/fileExtraction';
 import ChatSidebar from '../components/ChatSidebar';
 import ChatMessage from '../components/ChatMessage';
 import SettingsModal from '../components/SettingsModal';
-import UpgradeModal from '../components/UpgradeModal';
 
 const AGENT_A_NAME = "Agent A";
 const AGENT_B_NAME = "Agent B";
@@ -113,12 +112,6 @@ export default function ChatApp() {
         if (isProcessing || isExtracting) return;
         const text = inputText.trim();
         if (!text && !extractedTextContent) return;
-
-        const allowed = await checkDailyLimit();
-        if (!allowed) {
-            setUpgradeOpen(true);
-            return;
-        }
 
         const titleText = text || "File Analysis";
         
@@ -322,10 +315,6 @@ export default function ChatApp() {
                 onUpdate={(updatedUser) => setUser(updatedUser)}
             />
 
-            <UpgradeModal
-                isOpen={upgradeOpen}
-                onClose={() => setUpgradeOpen(false)}
-            />
         </div>
     );
 }

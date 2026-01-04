@@ -115,12 +115,6 @@ export default function Landing() {
 
                         {!isAuthenticated ? (
                             <>
-                                <Link
-                                    to={'/price'}
-                                    className="px-4 py-2 md:px-6 md:py-2.5 rounded-full bg-white border border-zinc-200 text-xs md:text-sm font-bold text-black hover:bg-zinc-50 transition shadow-sm whitespace-nowrap"
-                                >
-                                    Pricing
-                                </Link>
                                 <button
                                     onClick={() => openAuth('login')}
                                     className="px-4 py-2 md:px-6 md:py-2.5 rounded-full btn-primary text-xs md:text-sm font-medium whitespace-nowrap"
@@ -130,12 +124,6 @@ export default function Landing() {
                             </>
                         ) : (
                             <>
-                                <Link
-                                    to={'/price'}
-                                    className="px-4 py-2 md:px-6 md:py-2.5 rounded-full btn-primary text-xs md:text-sm font-medium whitespace-nowrap"
-                                >
-                                    Pricing
-                                </Link>
                                 <a
                                     href="/app"
                                     className="px-4 py-2 md:px-6 md:py-2.5 rounded-full bg-white border border-zinc-200 text-xs md:text-sm font-bold text-black hover:bg-zinc-50 transition shadow-sm whitespace-nowrap"
@@ -220,7 +208,7 @@ export default function Landing() {
                 </div>
             </main>
 
-            <section id="how-it-works" className="py-24 bg-white border-t border-zinc-100 relative z-10 w-full overflow-hidden">
+            <section id="how-it-works" className="py-24 bg-white border-t border-black-100 relative z-10 w-full overflow-hidden">
                 <div className="container mx-auto px-6 max-w-6xl">
                     <div className="text-center mb-16">
                         <h2 className="text-3xl font-bold text-zinc-900 mb-4">The Ping-Pong Protocol</h2>
@@ -253,7 +241,7 @@ export default function Landing() {
                 </div>
             </section>
 
-            <footer className="py-8 bg-zinc-50 border-t border-zinc-100 w-full">
+            <footer className="py-8 bg-zinc-50 border-t border-black-100 w-full">
                 <div className="container mx-auto px-6 text-center text-sm text-zinc-400">&copy; 2025 TwinAI.</div>
             </footer>
 

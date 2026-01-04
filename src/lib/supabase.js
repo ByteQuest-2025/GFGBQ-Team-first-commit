@@ -97,35 +97,35 @@ export async function dbDeleteChat(chatId) {
     await supabase.from('chats').delete().eq('id', chatId);
 }
 
-// --- DAILY LIMIT CHECKER ---
-export async function checkDailyLimit() {
-    const { data: { user } } = await supabase.auth.getUser();
-    if (!user) return false;
+// // --- DAILY LIMIT CHECKER ---
+// export async function checkDailyLimit() {
+//     const { data: { user } } = await supabase.auth.getUser();
+//     if (!user) return false;
 
-    // 1. Check if user is PRO
-    const { data: profile } = await supabase
-        .from('profiles')
-        .select('is_pro')
-        .eq('id', user.id)
-        .single();
+//     // 1. Check if user is PRO
+//     const { data: profile } = await supabase
+//         .from('profiles')
+//         .select('is_pro')
+//         .eq('id', user.id)
+//         .single();
 
-    if (profile && profile.is_pro) {
-        return true; 
-    }
+//     if (profile && profile.is_pro) {
+//         return true; 
+//     }
 
-    // 2. Count chats created TODAY
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    const todayISO = today.toISOString();
+//     // 2. Count chats created TODAY
+//     const today = new Date();
+//     today.setHours(0, 0, 0, 0);
+//     const todayISO = today.toISOString();
 
-    const { count, error } = await supabase
-        .from('chats')
-        .select('*', { count: 'exact', head: true })
-        .eq('user_id', user.id)
-        .gte('created_at', todayISO);
+//     const { count, error } = await supabase
+//         .from('chats')
+//         .select('*', { count: 'exact', head: true })
+//         .eq('user_id', user.id)
+//         .gte('created_at', todayISO);
 
-    if (count >= 100) return false;
+//     if (count >= 1) return false;
 
-    return true;
-}
+//     return true;
+// }
 

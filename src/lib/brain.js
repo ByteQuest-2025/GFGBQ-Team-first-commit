@@ -1,42 +1,43 @@
 // --- CONFIGURATION ---
-// ⚠️ WARNING: Your API Key is visible in the browser source code.
-// Ideally, restrict this key's usage to your domain in OpenRouter settings.
-const OPENROUTER_API_KEY = "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"; 
+const OPENROUTER_API_KEY = "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"; 
 const API_URL = 'https://openrouter.ai/api/v1/chat/completions';
 
 // --- PROMPTS ---
 const PROMPTS = {
-  'agent-a': "You are Deepseek, an expert sharing your own knowledge. Task: Answer the user's question based on your understanding and experience. Rules: Be clear, helpful, and structured. Share insights, reasoning, and practical ideas. Do not mention other agents. Keep it concise.",
+  'agent-a': "You are Deepseek. Answer the user's question. For every major fact, you MUST include a real source URL in brackets [e.g. source: https://example.com]. If you don't know the specific URL, suggest the official website for that topic.",
 
-  'agent-b': "You are Gemini, another expert. You are having a fascinating conversation with DeepSeek. participating in a collaborative discussion. Context: You have read Deepseek response. Your Task: Share your own perspective on the same question. Build upon Agent A's ideas where relevant. Add new insights, angles, or examples. Expand the thinking, not criticize or correct. You may agree, complement, or extend ideas naturally. Rules: Do NOT argue or criticize. Do NOT repeat Agent A's response. Do NOT mention system details or agent names. Instead, Yes, and... the conversation.Acknowledge DeepSeek's good points briefly.Share a completely NEW perspective, example, or nuance that DeepSeek missed.Use a conversational tone: That is a great point, DeepSeek, but we should also consider...Make the user think: Wow, I didn't think of that!.Keep it concise.",
+  'agent-b': "You are Gemini. Read Deepseek's response and add NEW details or context. You must also provide at least one source URL for your new information. Do not repeat what Deepseek said.",
 
-  'consensus': "You are the Final Agent. You are DeepSeek. You have collaborated with Gemini to solve a problem. Context: You have: The user question Agent A's knowledge Agent B's additional insights Your Task: Combine the ideas from both agents into one cohesive, high-quality answer. Keep the tone natural, human-like, and confident. Present the answer as a expert response. Output Requirements: Well-organized and easy to read. Produce a single, high-quality response that looks like it was written by a team of geniuses. Actionable and practical. 120 to 180 words by default. Do NOT mention agents or internal conversation."
+  'consensus': `You are the NVIDIA AI Verifier. 
+  Your goal is to format the previous insights into a "Verified Report".
+  
+  RULES:
+  1. Use the format: ### [CLAIM TITLE]
+  2. Write a clear explanation.
+  3. Provide the source on a new line: **Source:** [URL]
+  5. If the previous agents didn't provide a link, search your memory for the most likely official URL.`
 };
 
 const MODELS = {
-    'agent-a': "nex-agi/deepseek-v3.1-nex-n1:free",
-    'agent-b': "xiaomi/mimo-v2-flash:free",
-    'consensus': "nvidia/nemotron-3-nano-30b-a3b:free"
-  };
-  
+    'agent-a': "google/gemini-2.5-flash-lite-preview-09-2025", 
+    'agent-b': "x-ai/grok-code-fast-1", 
+    'consensus': "nvidia/nemotron-3-nano-30b-a3b:free" 
+};
 
 // --- MAIN FUNCTION ---
-// This function replaces the Supabase Edge Function call.
 export async function callTwinFunction(stage, context) {
     console.log(`🧠 Brain.js: Calling ${stage}...`);
 
-    // 1. Select Model & Prompt
     const model = MODELS[stage] || MODELS['agent-a'];
     const systemPrompt = PROMPTS[stage] || PROMPTS['agent-a'];
 
-    // 2. Build Messages
+    // If stage is consensus, we ensure it knows it's the final verifier
     const messages = [
         { role: "system", content: systemPrompt },
         ...context
     ];
 
     try {
-        // 3. Direct Fetch to OpenRouter
         const response = await fetch(API_URL, {
             method: 'POST',
             headers: {
@@ -47,7 +48,9 @@ export async function callTwinFunction(stage, context) {
             },
             body: JSON.stringify({
                 model: model,
-                messages: messages
+                messages: messages,
+                // Lower temperature for the Verifier to keep it factual
+                temperature: stage === 'consensus' ? 0.1 : 0.7 
             })
         });
 
@@ -57,13 +60,18 @@ export async function callTwinFunction(stage, context) {
         }
 
         const data = await response.json();
-        
-        // 4. Return just the content string
-        return data.choices[0].message.content;
+        let content = data.choices[0].message.content;
+
+        // --- SOURCE FORMATTING LOGIC ---
+        // This regex looks for URLs and ensures they are formatted as clean links
+        if (stage === 'consensus') {
+            content = content.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" style="color: #60a5fa; text-decoration: underline;">$1</a>');
+        }
+
+        return content;
 
     } catch (error) {
         console.error("Brain.js Error:", error);
         return `Error: ${error.message}`;
     }
 }
-

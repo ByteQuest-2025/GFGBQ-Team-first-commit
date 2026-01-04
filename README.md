@@ -1,3 +1,4 @@
 # GFGBQ-Team-first-commit
 
-Repository for first commit - Vibe Coding Hackathon
+# AI Hallucination and Citation Verification System
+
