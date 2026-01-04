@@ -6,7 +6,9 @@
 
 TwinAI is a powerful AI-driven application that utilizes multiple agents to provide verified, high-quality responses. It integrates OpenRouter for AI models and Supabase for backend services, including authentication and real-time database functionality.
 
-### deploy on vercel : https://gfgbq-team-first-commit.vercel.app/
+## Deployed on vercel :
+   
+   - **https://gfgbq-team-first-commit.vercel.app/**
 
 ## Features
 
