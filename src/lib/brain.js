@@ -1,5 +1,5 @@
 // --- CONFIGURATION ---
-const OPENROUTER_API_KEY = "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"; 
+const OPENROUTER_API_KEY = "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"; 
 const API_URL = 'https://openrouter.ai/api/v1/chat/completions';
 
 // --- PROMPTS ---
