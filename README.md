@@ -8,7 +8,7 @@ TwinAI is a powerful AI-driven application that utilizes multiple agents to prov
 
 ## Features
 
-- **Multi-Agent Consensus**: Uses Deepseek, Gemini, and NVIDIA Nemotron models to research and verify information.
+- **Multi-Agent Consensus**: Uses Gemini,Grok and NVIDIA Nemotron models to research and verify information.
 - **Source Verification**: Automatically provides real source URLs for claims made in the AI reports.
 - **Secure Authentication**: Built with Supabase Auth for safe and easy user management.
 - **Real-time Database**: Stores chats and messages securely using Supabase.
