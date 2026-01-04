@@ -12,7 +12,7 @@ TwinAI is a powerful AI-driven application that utilizes multiple agents to prov
 ## PPT Link and Demo video: 
 
    - **https://drive.google.com/file/d/1oE46wYFclL5XQLv_f5mJ6FgT33dFLHng/view?usp=sharing**
-   - **https://drive.google.com/file/d/1W--5Gx0fTOET4m2dJGrZoAF6MGtK2BaK/view?usp=sharing**
+   - **https://drive.google.com/file/d/1JPxHuCeSLDXWwPNQUKBzPvkAhbzUBvHJ/view?usp=sharing**
 
 ## Features
 
